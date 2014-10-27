@@ -8,9 +8,14 @@ import time
 import sys
 
 import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
 
+
+path = 'RobotoCondensed.ttf'
+prop = fm.FontProperties(fname=path)
 
 plt.style.use('ggplot')
+
 f = codecs.open(sys.argv[1].strip(), "r", "utf-8")
 datos = f.readlines()
 f.close()
@@ -43,11 +48,22 @@ y_axis = [len(list(group)) for key, group in groupby(counting)]
 
 fig, ax = plt.subplots(1)
 
-s = json.load(open("miestilo.json"))
 plt.bar(timestamps, y_axis)
-plt.xticks(rotation='45')
-plt.ylabel('Número de tuits por día')
-plt.title('Reportes de incendio desde la cuenta @bomberos')
+plt.yticks(size="14",
+           fontproperties=prop,
+           )
+plt.xticks(rotation='45',
+           size="14",
+           fontproperties=prop,
+           )
+plt.ylabel('Número de tuits por día',
+           size="16",
+           fontproperties=prop,
+           )
+plt.title('Reportes de incendio desde la cuenta @bomberos',
+          size="22",
+          fontproperties=prop,
+          )
 plt.tight_layout()
-plt.savefig('timeline' + sys.argv[1].strip() + '.svg')
+plt.savefig('timeline' + sys.argv[1].strip() + '.svg', frameon=None)
 sys.exit()
