@@ -7,11 +7,10 @@ import re
 import time
 import sys
 
-import brewer2mpl
-import matplotlib
 import matplotlib.pyplot as plt
 
 
+plt.style.use('ggplot')
 f = codecs.open(sys.argv[1].strip(), "r", "utf-8")
 datos = f.readlines()
 f.close()
@@ -41,18 +40,14 @@ for line in datos:
 timestamp = timestamps[::-1]
 y_axis = [len(list(group)) for key, group in groupby(counting)]
 
-# queremos color
-set2 = brewer2mpl.get_map('Set2', 'qualitative', 8).mpl_colors
-color = set2[0]
 
 fig, ax = plt.subplots(1)
 
 s = json.load(open("miestilo.json"))
-matplotlib.rcParams.update(s)
-plt.plot(timestamps, y_axis, color=color)
+plt.bar(timestamps, y_axis)
 plt.xticks(rotation='45')
 plt.ylabel('Número de tuits por día')
 plt.title('Reportes de incendio desde la cuenta @bomberos')
 plt.tight_layout()
-plt.savefig('timeline' + sys.argv[1].strip() + '.png')
+plt.savefig('timeline' + sys.argv[1].strip() + '.svg')
 sys.exit()
