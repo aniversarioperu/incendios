@@ -17,13 +17,13 @@ import utils
 sns.set(style="whitegrid")
 rs = np.random.RandomState(7)
 
-values_for_x_axis = utils.get_x_values()
-x = np.array(values_for_x_axis)
+x, y = utils.get_xy_values()
+x = np.array(x)
+y = np.array(y)
 print(">>> len(x)", len(x), x)
+print(">>> len(y)", len(y))
 f, ax = plt.subplots()
 
-y = np.arange(1, 17)
-print(">>> len(y)", len(y))
 sns.barplot(x, y, ax=ax)
 ax.set_ylabel("Sequential")
 
