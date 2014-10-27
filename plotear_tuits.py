@@ -7,40 +7,45 @@ import re
 import time
 import sys
 
+import numpy as np
+import seaborn as sns
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
+import utils
 
 
+sns.set(style="whitegrid")
+rs = np.random.RandomState(7)
+
+values_for_x_axis = utils.get_x_values()
+x = np.array(values_for_x_axis)
+print(">>> len(x)", len(x), x)
+f, ax = plt.subplots()
+
+y = np.arange(1, 17)
+print(">>> len(y)", len(y))
+sns.barplot(x, y, ax=ax)
+ax.set_ylabel("Sequential")
+
+
+sns.despine(bottom=True)
+plt.setp(f.axes, yticks=[])
+plt.tight_layout(h_pad=3)
+plt.savefig('timeline' + sys.argv[1].strip() + '.svg', frameon=None)
+
+
+
+
+sys.exit()
 path = 'RobotoCondensed.ttf'
 prop = fm.FontProperties(fname=path)
 
 plt.style.use('ggplot')
 
-f = codecs.open(sys.argv[1].strip(), "r", "utf-8")
-datos = f.readlines()
-f.close()
 
 timestamps = []
 counting = []
-x = []
-for line in datos:
-    line = line.strip()
-    if re.search("^[0-9]{6,},", line) and 'incendio' in line.lower():
-        line = line.split(",")
-        fecha = line[1]
-        unix_time = time.mktime(datetime.datetime.strptime(fecha, "%Y-%m-%d %H:%M:%S +%f").timetuple())
-        # correct for local time Lima -5 hours
-        unix_time -= 60*60*5
-        #print unix_time
-        fecha = fecha.split(" ")[0]
-        my_time = datetime.datetime.strptime(fecha, "%Y-%m-%d")
-        if my_time not in timestamps:
-            timestamps.append(my_time)
 
-        counting.append(fecha)
-        if fecha not in x:
-            x.append(fecha)
-        
 # de reversa
 timestamp = timestamps[::-1]
 y_axis = [len(list(group)) for key, group in groupby(counting)]
