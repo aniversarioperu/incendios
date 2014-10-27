@@ -1,14 +1,16 @@
-#! /usr/bin/env python
 # -*- coding: utf-8 -*-
-import sys
 import codecs
-import re
 import datetime
-import time
 from itertools import groupby
-import numpy as np
-import matplotlib.pyplot as plt
+import json
+import re
+import time
+import sys
+
 import brewer2mpl
+import matplotlib
+import matplotlib.pyplot as plt
+
 
 f = codecs.open(sys.argv[1].strip(), "r", "utf-8")
 datos = f.readlines()
@@ -19,7 +21,7 @@ counting = []
 x = []
 for line in datos:
     line = line.strip()
-    if re.search("^[0-9]{6,},", line):
+    if re.search("^[0-9]{6,},", line) and 'incendio' in line.lower():
         line = line.split(",")
         fecha = line[1]
         unix_time = time.mktime(datetime.datetime.strptime(fecha, "%Y-%m-%d %H:%M:%S +%f").timetuple())
@@ -45,10 +47,12 @@ color = set2[0]
 
 fig, ax = plt.subplots(1)
 
+s = json.load(open("miestilo.json"))
+matplotlib.rcParams.update(s)
 plt.plot(timestamps, y_axis, color=color)
-plt.xticks(rotation="45")
-plt.ylabel(u"NÃºmero de tuits por dÃ­a")
-plt.title(u'Reportes de incendio desde la cuenta @bomberos')
+plt.xticks(rotation='45')
+plt.ylabel('Número de tuits por día')
+plt.title('Reportes de incendio desde la cuenta @bomberos')
 plt.tight_layout()
-plt.savefig("timeline" + sys.argv[1].strip() + ".png")
+plt.savefig('timeline' + sys.argv[1].strip() + '.png')
 sys.exit()
