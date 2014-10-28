@@ -31,7 +31,7 @@ ax.set_ylabel('Número de tuits por día',
               fontproperties=prop,
               )
 ax.set_title('Reportes de incendio desde la cuenta @bomberos',
-             size=20,
+             size=22,
              fontproperties=prop,
              )
 
