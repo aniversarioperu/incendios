@@ -12,6 +12,7 @@ def get_xy_values():
 
     x = []
     y = []
+    nice_dates = []
     for line in datos:
         line = line.strip()
         if re.search("^[0-9]{6,},", line) and 'incendio' in line.lower():
@@ -21,8 +22,12 @@ def get_xy_values():
             date_object = datetime.datetime.strptime(fecha, "%Y-%m-%d")
             dia = datetime.datetime.strftime(date_object, '%d %b')
 
-            y.append(dia)
-            if dia not in x:
-                x.append(dia)
+            y.append(date_object)
+            if date_object not in x:
+                x.append(date_object)
     y = [len(list(group)) for key, group in groupby(y)]
-    return x, y
+    print(x)
+    print(len(x))
+    print(y)
+    print(len(y))
+    return x[::-1], y[::-1]

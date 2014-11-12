@@ -35,6 +35,8 @@ ax.set_title('Reportes de incendio desde la cuenta @bomberos',
              fontproperties=prop,
              )
 
+ax.set_xticklabels(x, rotation=90)
+
 
 plt.tight_layout()
 plt.savefig('timeline' + sys.argv[1].strip().replace(".csv", "") + '.svg', frameon=None)
