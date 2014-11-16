@@ -19,7 +19,7 @@ x = np.array(x)
 y = np.array(y)
 f, ax = plt.subplots()
 
-sns.barplot(x, y, ax=ax)
+sns.pointplot(x, y, ax=ax, markers='.', color='#D0D0D0')
 sns.despine(left=True)
 
 ax.set_xlabel('Fecha',
@@ -34,6 +34,7 @@ ax.set_title('Reportes de incendio desde la cuenta @bomberos',
              size=22,
              fontproperties=prop,
              )
+
 
 ax.set_xticklabels(x, rotation=90)
 
