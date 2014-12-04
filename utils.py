@@ -23,8 +23,8 @@ def get_xy_values():
             dia = datetime.datetime.strftime(date_object, '%d %b')
 
             y.append(date_object)
-            if date_object not in x:
-                x.append(date_object)
+            if dia not in x:
+                x.append(dia)
     y = [len(list(group)) for key, group in groupby(y)]
     print(x)
     print(len(x))
