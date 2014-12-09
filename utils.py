@@ -18,16 +18,13 @@ def get_xy_values():
         if re.search("^[0-9]{6,},", line) and 'incendio' in line.lower():
             line = line.split(",")
             fecha = line[1]
-            fecha = fecha.split(" ")[0]
-            date_object = datetime.datetime.strptime(fecha, "%Y-%m-%d")
-            dia = datetime.datetime.strftime(date_object, '%d %b')
+            fecha_split = fecha.split(" ")
+            fecha = fecha_split[0]
+            fecha = datetime.datetime.strptime(fecha, '%Y-%m-%d')
+            #dia = datetime.datetime.strftime(date_object, '%d %b')
 
-            y.append(date_object)
-            if dia not in x:
-                x.append(dia)
+            y.append(fecha)
+            if fecha not in x:
+                x.append(fecha)
     y = [len(list(group)) for key, group in groupby(y)]
-    print(x)
-    print(len(x))
-    print(y)
-    print(len(y))
     return x[::-1], y[::-1]

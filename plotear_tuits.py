@@ -17,11 +17,29 @@ path = 'RobotoCondensed.ttf'
 prop = fm.FontProperties(fname=path)
 
 
-x, y = utils.get_xy_values()
-x = np.array(x)
+dates, y = utils.get_xy_values()
 y = np.array(y)
+print(y, len(y))
+x = np.array(range(0, len(dates), 1))
+print(x, len(dates))
 
-f, ax = plt.subplots(1)
+x_labels = []
+for i in dates:
+    x_labels.append(i.date())
+
+ind = np.arange(len(y))
+fig, ax = plt.subplots(1)
+#rects1 = ax.bar(ind, y, width=0.5, color="#2ecc71", edgecolor="#3498db")
+ax.set_xticks(ind + 0.2)
+ax.set_title('Reportes de incendio desde la cuenta @bomberos',
+             size=22,
+             fontproperties=prop,
+             )
+ax.tick_params(axis="x", color="gray", labelsize=8)
+
+ax.set_xticklabels(x_labels)
+plt.ylim([0,max(y) + 2])
+plt.xticks(rotation="90")
 
 # queremos color
 set2 = brewer2mpl.get_map('Set2', 'qualitative', 8).mpl_colors
@@ -35,18 +53,11 @@ ax.set_ylabel('Número de tuits por día',
               size=14,
               fontproperties=prop,
               )
-ax.set_title('Reportes de incendio desde la cuenta @bomberos',
-             size=22,
-             fontproperties=prop,
-             )
 
-
-ax.set_xticklabels(x, rotation=90, 
-              )
-
-ppl.plot(ax, x, y, linewidth=3.0, color=color)
-
+plt.plot(x, y, color=color)
 plt.tight_layout()
 plt.savefig('timeline' + sys.argv[1].strip().replace(".csv", "") + '.svg', frameon=None)
 
-sys.exit()
+
+
+
