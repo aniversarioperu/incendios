@@ -15,7 +15,7 @@ def get_xy_values():
     nice_dates = []
     for line in datos:
         line = line.strip()
-        if re.search("^[0-9]{6,},", line) and 'incendio' in line.lower():
+        if re.search("^[0-9]{6,},", line) and 'INCENDIO' in line:
             line = line.split(",")
             fecha = line[1]
             fecha_split = fecha.split(" ")
