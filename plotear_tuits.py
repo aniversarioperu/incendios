@@ -44,6 +44,7 @@ for i in set(dates_2013 + dates_2014):
     if i.date() not in x_labels:
         x_labels.append(i.date())
 x_labels.sort()
+x_labels = utils.remove_year_from_dates(x_labels)
 
 ind = np.arange(len(y_2014))
 fig, ax = plt.subplots(1)
@@ -67,7 +68,7 @@ ax.set_xlabel('Fecha',
               size=14,
               fontproperties=prop,
               )
-ax.set_ylabel('Número de tuits por día',
+ax.set_ylabel('Número de tuits por día con palabra "INCENDIO"',
               size=14,
               fontproperties=prop,
               )

@@ -5,6 +5,11 @@ import re
 import datetime
 import time
 
+
+def remove_year_from_dates(dates):
+    return [datetime.datetime.strftime(i, '%b %d') for i in dates]
+
+
 def get_xy_values(filename):
     f = codecs.open(filename, "r", "utf-8")
     datos = f.readlines()
