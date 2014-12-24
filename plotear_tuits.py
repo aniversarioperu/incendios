@@ -47,6 +47,7 @@ x_labels.sort()
 x_labels = utils.remove_year_from_dates(x_labels)
 
 ind = np.arange(len(y_2014))
+print(x_labels)
 fig, ax = plt.subplots(1)
 #rects1 = ax.bar(ind, y, width=0.5, color="#2ecc71", edgecolor="#3498db")
 ax.set_xticks(ind)
