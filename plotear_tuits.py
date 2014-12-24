@@ -73,7 +73,9 @@ ax.set_ylabel('Número de tuits por día con palabra "INCENDIO"',
               fontproperties=prop,
               )
 
-plt.plot(x_2014, y_2013, '#7f8c8d', x_2014, y_2014, '#27ae60')
+plt.plot(x_2014, y_2013, '#7f8c8d', x_2014, y_2014, '#27ae60', label='mi lengenda')
+ax.legend(['Año 2013', 'Año 2014'])
+
 plt.tight_layout()
 plt.savefig('timeline_incendio_2013_vs_2014.svg', frameon=None)
 
